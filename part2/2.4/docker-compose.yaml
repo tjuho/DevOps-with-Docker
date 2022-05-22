@@ -1,0 +1,25 @@
+services:
+ frontend:
+  build: ./frontend
+  container_name: example-frontend
+  ports:
+   - target: 5000
+     published: 5000
+     protocol: tcp
+     mode: host  
+ backend:
+  build: ./backend
+  container_name: example-backend
+  ports:
+   - target: 8080
+     published: 8080
+     protocol: tcp
+     mode: host
+  environment:
+   REDIS_HOST: redis
+   REQUEST_ORIGIN: http://localhost
+ redis:
+  image: redis
+  container_name: redis
+  command: ["redis-server"]
+ 

@@ -1,0 +1,6 @@
+before
+frontend node:16 1.23GB
+backend golan:1.16 1.07GB
+after
+frontend alpine:3.13 291MB
+backend alpine:3.13 584MB

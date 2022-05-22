@@ -1,0 +1,35 @@
+services:
+ frontend:
+  build: ./frontend
+  container_name: example-frontend
+  ports:
+   - target: 5000
+     published: 5000
+     protocol: tcp
+     mode: host  
+ backend:
+  build: ./backend
+  container_name: example-backend
+  ports:
+   - target: 8080
+     published: 8080
+     protocol: tcp
+     mode: host
+  environment:
+   POSTGRES_HOST: postgresdb
+   POSTGRES_PASSWORD: postgres
+   POSTGRES_USER: postgres
+   POSTGRES_DATABASE: postgres
+   REDIS_HOST: redis
+   REQUEST_ORIGIN: http://localhost
+  depends_on:
+   - postgresdb
+ postgresdb:
+  image: postgres:13.2-alpine
+  restart: unless-stopped
+  environment:
+   POSTGRES_PASSWORD: postgres
+   POSTGRES_USER: postgres
+   POSTGRES_DB: postgres
+  container_name: postgresdb
+ 

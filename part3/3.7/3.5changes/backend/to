@@ -1,0 +1,13 @@
+FROM alpine:3.13
+WORKDIR /usr/src/app
+COPY ./example-backend/ .
+ENV REQUEST_ORIGIN=http://localhost
+
+RUN apk add go && \
+go build . && \
+rm -r /usr/src/app && \
+adduser appuser
+USER appuser
+CMD ["./server"]
+
+# running command as user instead of root, deleted unnecessary files

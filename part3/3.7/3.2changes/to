@@ -1,0 +1,15 @@
+FROM ubuntu
+WORKDIR /usr/app
+COPY ./deploy.sh ./
+RUN apt-get update -y && \
+ apt-get install curl git -y && \
+ curl -fsSL https://get.docker.com -o get-docker.sh && \
+ chmod +x get-docker.sh && \
+ ./get-docker.sh && \ 
+ adduser appuser && \
+ apt-get remove curl -y
+USER appuser
+
+ENTRYPOINT ["/usr/app/deploy.sh"]
+
+# combined run stages, removed unnecessary packages, runs with normal user instead of root

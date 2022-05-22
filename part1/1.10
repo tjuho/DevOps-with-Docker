@@ -1,0 +1,5 @@
+docker run -p 127.0.0.1:3456:8080 devopsdockeruh/simple-web-service server
+or 
+docker run -p 127.0.0.1:3456:8080 web-server
+and in browser
+http://localhost:3456/
